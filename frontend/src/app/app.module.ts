@@ -6,20 +6,39 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { TodoListComponent } from './components/todo-list/todo-list.component';
-import { TodoService } from './components/todo-list/todo.service';
+import { TodoService } from './services/todo.service';
+import { TodoListSelectorComponent } from './components/todo-list-selector/todo-list-selector.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { Router, RouterModule, Routes } from '@angular/router';
 
+const appRoutes: Routes = [
+  {
+    path: 'lists',
+    component: TodoListSelectorComponent
+  },
+  {
+    path: '',
+    component: TodoListSelectorComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
+  }
+];
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    TodoListComponent
+    TodoListSelectorComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(appRoutes, { enableTracing: true })
   ],
   providers: [TodoService],
   bootstrap: [AppComponent]
