@@ -8,9 +8,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TodoService {
-  private baseUrl = 'http://localhost:8080' + '/api';
-  public TODOLISTS_URL = `${this.baseUrl}/todolists`;
-  public TODOS_URL = `${this.baseUrl}/todos`;
+  // tslint:disable-next-line: quotemark
+  private baseUrl = "http://localhost:8080/api";
+  private  TODOLISTS_URL = `${this.baseUrl}/todolists`;
+  private  TODOS_URL = `${this.baseUrl}/todos`;
 
   constructor(private http: HttpClient) { }
 
@@ -49,8 +50,4 @@ export class TodoService {
     return this.http.delete<Todo>(this.TODOS_URL + '/' + todoData.id);
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('Some error occured', error);
-    return Promise.reject(error.message || error);
-  }
 }

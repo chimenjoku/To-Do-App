@@ -31,6 +31,14 @@ public class TodoList{
     public String getId() {
         return id;
     }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title= title;
+    }
+
 
     public void setId(String id) {
         this.id = id;

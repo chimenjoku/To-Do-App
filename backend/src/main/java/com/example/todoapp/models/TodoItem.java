@@ -19,7 +19,7 @@ public class TodoItem {
     @Indexed(unique=true)
     private String text;
 
-    private TodoList todolist;
+    private String todolist;
 
     private Boolean completed = false;
 
@@ -29,7 +29,7 @@ public class TodoItem {
         super();
     }
 
-    public TodoItem(String title, TodoList todolist) {
+    public TodoItem(String title, String todolist) {
         this.text = text;
         this.todolist = todolist;
     }
@@ -42,11 +42,11 @@ public class TodoItem {
         this.id = id;
     }
 
-    public TodoList getTodolist() {
+    public String getTodolist() {
         return todolist;
     }
 
-    public void getTodolist(TodoList todolist) {
+    public void getTodolist(String todolist) {
         this.todolist = todolist;
     }
 
@@ -54,7 +54,7 @@ public class TodoItem {
         return text;
     }
 
-    public void setText(String title) {
+    public void setText(String text) {
         this.text = text;
     }
 
@@ -77,7 +77,7 @@ public class TodoItem {
     @Override
     public String toString() {
         return String.format(
-                "TodoItem[id=%s, text='%s', completed='%s', todoList='%s']",
+                "TodoItem[id=%s, text='%s', completed='%s', todolist='%s']",
                 id, text, completed);
     }
 }

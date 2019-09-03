@@ -14,13 +14,12 @@ export class TodoListSelectorComponent implements OnInit {
   todolists: Todolist[] = [];
   todos: Todo[] = [];
   selectedTodolist: Todolist;
-  newTodo: Todo = new Todo();
+  visibleTodo: Todo = new Todo();
   editing = false;
   editingTodo: Todo = new Todo();
 
 
-  constructor(private todoService: TodoService,
-  ) { }
+  constructor(private todoService: TodoService ) { }
 
   ngOnInit() {
     this.getAllTodolists();
@@ -47,7 +46,8 @@ export class TodoListSelectorComponent implements OnInit {
     );
   }
 
-  createTodolist(): void {
+  createTodolist() {
+    // tslint:disable-next-line: prefer-const
     let newTodolist: Todolist = {
       title : 'New To-do list',
       id: null,
@@ -61,14 +61,13 @@ export class TodoListSelectorComponent implements OnInit {
       },
       err => { alert('An error has occurred while saving the notebook'); }
     );
-
   }
 
   updateTodolist(updatedTodoList: Todolist) {
     this.todoService.postTodolist(updatedTodoList).subscribe(
       res => {
       },
-      err => { alert('An error has occurred while saving the Todolist'); }
+      err => { alert('An error has occurred while updating the Todolist'); }
     );
   }
 
@@ -97,11 +96,12 @@ export class TodoListSelectorComponent implements OnInit {
       err => { alert('An error has occurred while downloading the notes;'); }
     );
   }
-  createTodo(todolistId: string): void {
+  createTodo(todoForm: NgForm, selected: Todolist) {
+    // tslint:disable-next-line: prefer-const
     let newTodo: Todo = {
       id: null,
       text: null,
-      todolist: todolistId,
+      todolist: selected.title,
       completed: null,
       createdAt: null
     };
