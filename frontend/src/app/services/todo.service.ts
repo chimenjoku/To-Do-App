@@ -23,20 +23,17 @@ export class TodoService {
     return this.http.get<Todo[]>(this.TODOS_URL);
   }
 
+  getSelectedTodos(todolist: string): Observable<Todo[]> {
+    return this.http.get<Todo[]>(this.TODOS_URL + '/' + todolist);
+  }
+
   postTodolist(todolistData: Todolist): Observable<Todolist> {
     return this.http.post<Todolist>(this.TODOLISTS_URL, todolistData);
-
   }
 
   deleteTodolist(id: string): Observable<any> {
     return this.http.delete(this.TODOLISTS_URL + '/' + id);
-
   }
-
-// TODO: Add capability to retrieve every todo in a todo list
-  // getTodosByTodolist(todolistId: string): Observable<Todo[]> {
-  //   return this.http.get<Todo[]>(this.NOTES_BY_NOTEBOOK_URL + notebookId);
-  // }
 
   saveTodo(todoData: Todo): Observable<Todo> {
     return this.http.post<Todo>(this.TODOS_URL, todoData);

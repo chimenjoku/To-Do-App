@@ -89,11 +89,11 @@ export class TodoListSelectorComponent implements OnInit {
 
   selectTodolist(todolist: Todolist) {
     this.selectedTodolist = todolist;
-    this.todoService.getTodos().subscribe(
+    this.todoService.getSelectedTodos(todolist.title).subscribe(
       res => {
         this.todos = res;
       },
-      err => { alert('An error has occurred while downloading the notes;'); }
+      err => { alert('An error has occurred while downloading lists'); }
     );
   }
   createTodo(todoForm: NgForm, selected: Todolist) {

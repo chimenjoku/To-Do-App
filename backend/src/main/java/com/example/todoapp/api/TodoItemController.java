@@ -23,19 +23,25 @@ public class TodoItemController {
         return todoItemRepository.findAll(sortByCreatedAtDesc);
     }
 
+    @GetMapping(value="/todos/{todolist}")
+    public List<TodoItem>  getSelectedTodos(@PathVariable("todolist") String todolist) {
+        return todoItemRepository.findByTodolist(todolist);
+    }
+
     @PostMapping("/todos")
     public TodoItem createTodo(@Valid @RequestBody TodoItem todoItem) {
         todoItem.setCompleted(false);
         return todoItemRepository.save(todoItem);
-    }
 
+    }
+/*
     @GetMapping(value="/todos/{id}")
     public ResponseEntity<TodoItem> getTodoById(@PathVariable("id") String id) {
         return todoItemRepository.findById(id)
                 .map(todoItem -> ResponseEntity.ok().body(todoItem))
                 .orElse(ResponseEntity.notFound().build());
     }
-
+*/
     @PutMapping(value="/todos/{id}")
     public ResponseEntity<TodoItem> updateTodo(@PathVariable("id") String id,
                                                @Valid @RequestBody TodoItem todoItem) {
